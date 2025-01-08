@@ -126,8 +126,11 @@ function revealAllMines() {
 }
 
 function revealCell(r, c) {
-    if (!isValid(r, c) || revealed[r][c] || flagged[r][c]) {
+    if (!isValid(r, c) || flagged[r][c]) {
         return;
+    }
+    if (revealed[r][c]) {
+        revealAround(r, c);
     }
     const cell = document.querySelector(`.cell[data-row="${r}"][data-col="${c}"]`);
     revealed[r][c] = true;
@@ -143,8 +146,30 @@ function revealCell(r, c) {
         revealAdjacentCells(r, c);
     }
     if (checkWin()) {
-        alert('congratulations, you win!!!!');
         revealAllMines();
+        alert('congratulations, you win!!!!');
+    }
+}
+
+function revealAround(r, c) {
+    if (!revealed[r][c]) return;
+    let flagsAround = 0;
+    DIRECTIONS.forEach(([i, j]) => {
+        const newR = r + i, newC = c + j;
+        if (isValid(newR, newC) && flagged[newR][newC]) {
+            flagsAround++;
+        }
+    });
+    if (flagsAround !== mineField[r][c]) return;
+    DIRECTIONS.forEach(([i, j]) => {
+        const newR = r + i, newC = c + j;
+        if (isValid(newR, newC) && !revealed[newR][newC] && !flagged[newR][newC]) {
+            revealCell(newR, newC);
+        }
+    });
+    if (checkWin()) {
+        revealAllMines();
+        alert('Congratulations, you win!!!!');
     }
 }
 
@@ -159,14 +184,22 @@ function revealAdjacentCells(r, c) {
 }
 
 function checkWin() {
+    let allMinesFlagged = true;
+    let allNonMinesRevealed = true;
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < columns; c++) {
-            if (mineField[r][c] !== -1 && !revealed[r][c]) {
-                return false;
+            if (mineField[r][c] === -1) {
+                if (!flagged[r][c]) {
+                    allMinesFlagged = false;
+                }
+            } else {
+                if (!revealed[r][c]) {
+                    allNonMinesRevealed = false;
+                }
             }
         }
     }
-    return true;
+    return allNonMinesRevealed || (allMinesFlagged && allNonMinesRevealed);
 }
 
 function setFlag(r, c) {
@@ -198,8 +231,6 @@ function updateMinesLefts() {
 BACK_BUTTON.addEventListener('click', function() {
     window.location.href = "home.html";
 });
-
-
 PLAY_BUTTON.addEventListener('click', getNumberOfMines);
 RESET_BUTTON.addEventListener('click', getNumberOfMines);
 
