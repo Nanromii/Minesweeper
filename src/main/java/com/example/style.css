@@ -1,0 +1,135 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; /* Trung tâm cả chiều ngang và dọc */
+    min-height: 100vh; /* Đảm bảo toàn màn hình */
+    background-color: #f4f6f9; /* Màu nền nhẹ hơn */
+    margin: 0;
+    padding: 20px;
+}
+
+#game {
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Tạo viền bóng nhẹ */
+    background-color: #ffffff; /* Nền trắng cho game */
+    border-radius: 10px; /* Bo góc mềm mại */
+    padding: 20px;
+}
+
+#input-section {
+    display: flex;
+    flex-direction: column; /* Sắp xếp theo cột */
+    align-items: center;
+    margin-bottom: 20px; /* Tăng khoảng cách */
+}
+
+#input-section input {
+    padding: 5px;
+    font-size: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px; /* Bo góc mềm mại */
+    margin-top: 5px;
+}
+
+#input-section button {
+    padding: 5px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button {
+    padding: 5px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #2980b9;
+}
+
+#flag {
+    padding: 5px 20px;
+    font-size: 16px;
+    color: #fff;
+    background-color: #3498db;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 10px;
+    margin-right: 10px;
+}
+
+#flag:hover {
+    background-color: #2980b9;
+}
+
+#input-section button:hover {
+    background-color: #2980b9;
+}
+
+#mines-info {
+    display: none;
+    font-size: 18px;
+    color: #2c3e50;
+    margin-top: 20px;
+}
+
+#board {
+    display: grid;
+    gap: 2px;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 10px; /* Bo góc mềm mại */
+}
+
+.cell {
+    width: 40px; /* Tăng kích thước ô */
+    height: 40px;
+    background-color: #ddd;
+    border: 1px solid #bbb;
+    text-align: center;
+    line-height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.cell.hidden {
+    background-color: #888;
+    cursor: pointer;
+}
+
+.cell.flagged {
+    background-color: #f1c40f; /* Màu cờ vàng */
+    color: #fff;
+}
+
+.cell.mine {
+    background-color: #e74c3c; /* Màu đỏ nổi bật */
+    color: #fff;
+    font-weight: bold; /* Chữ đậm */
+}
+
+.cell:hover {
+    background-color: #e0e0e0;
+    transform: scale(1.1); /* Phóng to nhẹ khi hover */
+}
+
+.cell:focus {
+    outline: none;
+}

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minesweeper</title>
+    <meta name="viewport" content="with=device-width, initial-scale=1.0">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+<div id="game">
+    <div id="input-section">
+        <h1>Minesweeper</h1>
+        Enter the number of mines: <input id="numberOfMines" value="">
+
+        <br>
+        <button id="play-button" onclick="getNumberOfMines()">Play</button>
+    </div>
+    <div id="mines-info">
+        <button id="back-button">Back</button>
+        <button id="reset-button">Reset</button>
+        <span id="flag">Flags: <span id="number-flag">0</span></span>
+    </div>
+    <div id="board"></div>
+</div>
+<script src="minesweeper.js"></script>
+</body>
+</html>
